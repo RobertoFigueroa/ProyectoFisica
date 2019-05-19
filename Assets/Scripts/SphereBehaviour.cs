@@ -7,17 +7,17 @@ public class SphereBehaviour : MonoBehaviour
 {
 
     public Rigidbody rb;
-    public Slider masa;
-    public Slider velocidad;
+    //public Slider masa;
+    //public Slider velocidad;
     private float velocity;
     private float mass;
     // Start is called before the first frame update
     void Start()
     {
-        velocidad = transform.Find("Canvas").Find("Vinicial").GetComponent<Slider>();
-        velocity = velocidad.value;
-        masa = transform.Find("Canvas").Find("Masa").GetComponent<Slider>();
-        mass = masa.value;
+        //velocidad = transform.Find("Canvas").Find("Vinicial").GetComponent<Slider>();
+        //velocity = velocidad.value;
+        //masa = transform.Find("Canvas").Find("Masa").GetComponent<Slider>();
+        //mass = masa.value;
         rb = transform.GetComponent<Rigidbody>();
         if (rb)
         {
@@ -31,11 +31,11 @@ public class SphereBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = velocidad.value;
-        mass = masa.value;
+        //velocity = velocidad.value;
+        //mass = masa.value;
         transform.Find("Canvas").Find("Velocidad").GetComponent<Text>().text = rb.velocity.ToString();
-        transform.Find("Canvas").Find("Vinicial").Find("printvi").GetComponent<Text>().text = velocity.ToString();
-        transform.Find("Canvas").Find("Masa").Find("printmasa").GetComponent<Text>().text = mass.ToString();
+        //transform.Find("Canvas").Find("Vinicial").Find("printvi").GetComponent<Text>().text = velocity.ToString();
+        //transform.Find("Canvas").Find("Masa").Find("printmasa").GetComponent<Text>().text = mass.ToString();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -44,7 +44,6 @@ public class SphereBehaviour : MonoBehaviour
 
         HingeJoint join = gameObject.AddComponent<HingeJoint>();
         join.connectedBody = collision.rigidbody;
-        
     }
 
 }
