@@ -16,7 +16,7 @@ public class barra : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("El com es : " + rb.centerOfMass);
+        //Debug.Log("El com es : " + rb.centerOfMass);
     }
 
     
