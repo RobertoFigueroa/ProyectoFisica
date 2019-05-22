@@ -34,8 +34,8 @@ public class SphereBehaviour : MonoBehaviour
 
     void Start()
     {
-        rbe = transform.GetComponent<Rigidbody>();
-        rbb = transform.GetComponent<Rigidbody>();
+        /*rbe = transform.GetComponent<Rigidbody>();
+        rbb = transform.GetComponent<Rigidbody>();*/
         //Toma los puntos inicial y final de la barra y calcula su largo y su centro de masa
         l_barra = punto_inicial.transform.position - punto_final.transform.position;
         large = l_barra.z;
