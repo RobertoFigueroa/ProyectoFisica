@@ -37,4 +37,8 @@ public class Button : MonoBehaviour
         //Modifica el valor para iniciar la simulacion en SphereBehaviour.cs
         DiskController.iniciar = true;
     }
+    public void Salir()
+    {
+        Application.Quit();
+    }
 }
