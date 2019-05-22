@@ -185,7 +185,7 @@ public class SphereBehaviour : MonoBehaviour
         if (hasCollided)
         {
             string message = "La velocidad angular es de " + -this.angularVelocity + " rad/s";
-            message += "\nEl momento de inercia de la barra es " + this.angularMomentum + " kg·m²/s.";
+            message += "\nEl momento de inercia de la \nbarra es " + this.angularMomentum + " kg·m²/s.";
 
             GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height - 70, 300, 150), message);
         }

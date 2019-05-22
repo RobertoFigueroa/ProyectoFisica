@@ -8,16 +8,16 @@ public class DiskController : MonoBehaviour
     public Rigidbody rbd;
     public Rigidbody rbesf1;
     public Rigidbody rbesf2;
-    public Slider Vang; //Velocidad angular inicial del disco
-    public Slider Mdis; //Masa del disco
-    public Slider Rad; //Radio del disco
-    public Slider radp;//posicion de las esferitas
-    public Slider mesf; //masa de las esferas
-    public Slider alt; //altura de la que caen las esferas
-    private float speed = 150; //Velocidad angular
-    private float altura;
-    private float Radio;
-    private float radio;
+    public Slider Vang; //Slider de Velocidad angular inicial del disco
+    public Slider Mdis; //Slider de Masa del disco
+    public Slider Rad; //Slider de Radio del disco
+    public Slider radp;//Slider de posicion de las esferitas
+    public Slider mesf; //Slider de masa de las esferas
+    public Slider alt; //Slider de altura de la que caen las esferas
+    private float speed; //Velocidad angular
+    private float altura; //altura de la que caen las esferas
+    private float Radio; //tamaño del disco
+    private float radio; //del centro del dico a la posicion de las esferas
     public static bool iniciar;
     private bool hasCollided = false;
     private float angularVelocity;
@@ -30,7 +30,9 @@ public class DiskController : MonoBehaviour
     }
     void Update()
     {
+        // Velocidad angular a la que gira 
         transform.Rotate(Vector3.up*speed * Time.deltaTime);
+        //Inicializa los valores al presionar el boton de inicio
         if (iniciar == true)
         {
             Comenzar();
@@ -39,14 +41,16 @@ public class DiskController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        //Cuando caen las pelotitas hace los calculos
+        hasCollided = true;
         this.angularMomentum = Itot(rbesf1.mass, this.radio, rbd.mass, this.Radio);
         this.angularVelocity = Vel_Ang_Final(rbesf1.mass, rbd.mass, Vesf(altura), this.speed, this.radio, this.Radio);
         this.speed = this.angularVelocity;
     }
+
+    //Valores con los que inicia la simulacion
     void Comenzar()
     {
-        hasCollided = true;
         rbd.mass = Mdis.value;
         Radio = 2 * Rad.value;
         this.speed = Vang.value;
@@ -59,6 +63,7 @@ public class DiskController : MonoBehaviour
         rbesf2.mass = mesf.value;
     }
 
+    //Calculo del punto en el disco que estaran las esferitas
     float Calradio(float rad1, float rad2)
     {
         float radt = 0;
@@ -66,6 +71,7 @@ public class DiskController : MonoBehaviour
         return radt;
     }
 
+    //Calculo de la velocidad de las pelotitas justo antes de caer en el disco
     float Vesf(float altu)
     {
         float vi = 0;
@@ -73,6 +79,7 @@ public class DiskController : MonoBehaviour
         return vi;
     }
 
+    //Calculo de Momento de Inercia del disco
     float Idis(float masad, float radiod)
     {
         float idisco = 0;
@@ -80,6 +87,7 @@ public class DiskController : MonoBehaviour
         return idisco;
     }
 
+    //Calculo del momento de inercia total (disco+esferas)
     float Itot(float masa1, float radio1, float masa2, float radio2)
     {
         float itot = 0;
@@ -87,6 +95,7 @@ public class DiskController : MonoBehaviour
         return itot;
     }
 
+    //Calculo de la velocidad angular final cuando tiene las pelotitas
     float Vel_Ang_Final(float masa1, float masa2, float vi,float wi,  float radio1, float radio2)
     {
         float vf = 0;
@@ -99,7 +108,7 @@ public class DiskController : MonoBehaviour
         if (hasCollided)
         {
             string message = "La velocidad angular es de " + this.angularVelocity + " rad/s";
-            message += "\nEl momento de inercia del disco es " + this.angularMomentum + " kg·m²/s.";
+            message += "\nEl momento de inercia del \ndisco es " + this.angularMomentum + " kg·m²/s.";
 
             GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height - 70, 300, 150), message);
         }
