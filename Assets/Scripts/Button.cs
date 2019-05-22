@@ -29,4 +29,12 @@ public class Button : MonoBehaviour
     {
         SceneManager.LoadScene(NewScene);
     }
+    public void Inicio()
+    {
+        //Desactiva la pantalla de Inicio (Panel de UI)
+        Panel.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
+        //Modifica el valor para iniciar la simulacion en SphereBehaviour.cs
+        DiskController.iniciar = true;
+    }
 }
