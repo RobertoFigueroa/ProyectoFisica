@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class barra : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Vector3 com;
+    /*public Rigidbody rb;
+    public Vector3 com;*/
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = com;
+        /*rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = com;*/
     }
 
     // Update is called once per frame
@@ -19,5 +19,12 @@ public class barra : MonoBehaviour
         //Debug.Log("El com es : " + rb.centerOfMass);
     }
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        HingeJoint join = gameObject.AddComponent<HingeJoint>();
+        join.connectedBody = collision.rigidbody;
+    }
+
+
 }

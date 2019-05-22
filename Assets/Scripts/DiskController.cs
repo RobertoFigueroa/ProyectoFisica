@@ -39,23 +39,22 @@ public class DiskController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        hasCollided = true;
-        HingeJoint join = gameObject.AddComponent<HingeJoint>();
-        join.connectedBody = collision.rigidbody;
-        this.angularMomentum = Itot(rbesf1.mass, radio, rbd.mass, Radio);
-        this.angularVelocity = Vel_Ang_Final(rbesf1.mass, rbd.mass, Vesf(altura), speed, radio, Radio);
-        speed = this.angularVelocity;
+        
+        this.angularMomentum = Itot(rbesf1.mass, this.radio, rbd.mass, this.Radio);
+        this.angularVelocity = Vel_Ang_Final(rbesf1.mass, rbd.mass, Vesf(altura), this.speed, this.radio, this.Radio);
+        this.speed = this.angularVelocity;
     }
     void Comenzar()
     {
+        hasCollided = true;
         rbd.mass = Mdis.value;
         Radio = 2 * Rad.value;
-        speed = Vang.value;
-        radio = Calradio(Rad.value, radp.value);
+        this.speed = Vang.value;
+        this.radio = Calradio(Rad.value, radp.value);
         transform.localScale = new Vector3(Radio, (float)0.1, Radio);
-        altura = 3+alt.value;
+        this.altura = 3+alt.value;
         rbesf1.position = new Vector3((float)0.48, altura, -radio);
-        rbesf2.position = new Vector3((float)-0.48, (float)(altura+0.01), radio);
+        rbesf2.position = new Vector3((float)-0.48, altura, radio);
         rbesf1.mass = mesf.value;
         rbesf2.mass = mesf.value;
     }
@@ -70,7 +69,7 @@ public class DiskController : MonoBehaviour
     float Vesf(float altu)
     {
         float vi = 0;
-        vi = Mathf.Pow((2 * altu * (float)9.8), (float)0.5);
+        vi = Mathf.Pow((2 * (altu-3) * (float)9.8), (float)0.5);
         return vi;
     }
 
@@ -99,7 +98,7 @@ public class DiskController : MonoBehaviour
     {
         if (hasCollided)
         {
-            string message = "La velocidad angular es de " + -this.angularVelocity + " rad/s";
+            string message = "La velocidad angular es de " + this.angularVelocity + " rad/s";
             message += "\nEl momento de inercia del disco es " + this.angularMomentum + " kg·m²/s.";
 
             GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height - 70, 300, 150), message);
