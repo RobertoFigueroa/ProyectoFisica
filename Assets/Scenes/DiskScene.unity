@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 356961154}
   m_Direction: 0
   m_MinValue: 10
-  m_MaxValue: 150
+  m_MaxValue: 40
   m_WholeNumbers: 1
   m_Value: 10
   m_OnValueChanged:
@@ -3243,8 +3243,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbd: {fileID: 1482312069}
-  rbesf1: {fileID: 0}
-  rbesf2: {fileID: 0}
+  rbesf1: {fileID: 1874555586}
+  rbesf2: {fileID: 1794122939}
+  Vang: {fileID: 438274614}
+  Mdis: {fileID: 1835171563}
+  Rad: {fileID: 1404731962}
+  radp: {fileID: 1876933532}
+  mesf: {fileID: 1857990379}
+  alt: {fileID: 1368608481}
 --- !u!65 &1482312065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4273,7 +4279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794122938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.82, y: 8, z: 1.87}
+  m_LocalPosition: {x: -0.48, y: 8.5, z: 1.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -81,7 +81,7 @@ public class SphereBehaviour : MonoBehaviour
             float veli = rbe.velocity.x;
             rbb.velocity = new Vector3(Vel_CM(veli,rbe.mass, rbb.mass),0,0);
             this.angularVelocity = Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large);
-            rbb.angularVelocity = new Vector3(Vel_Ang_Inelastica(veli,rbe.mass, rbb.mass,cm_barra,p_impacto,large), 0, 0);
+            rbb.angularVelocity = new Vector3(Vel_Ang_Inelastica(veli,rbe.mass, rbb.mass,cm_barra,p_impacto,large),0,0);
         }
     }
     
