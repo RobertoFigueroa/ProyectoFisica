@@ -68,7 +68,8 @@ public class SphereBehaviour : MonoBehaviour
             p_impacto = gameObject.transform.position;
             float vel = rbe.velocity.x;
             rbb.velocity = new Vector3(Vel_B(vel, rbe.mass, rbb.mass, large, cm_barra, p_impacto), 0, 0);
-            rbb.angularVelocity = new Vector3(Vel_Ang_Elastica(vel,rbe.mass, rbb.mass,large,cm_barra,p_impacto),0,0);
+            //rbb.angularVelocity = new Vector3(Vel_Ang_Elastica(vel,rbe.mass, rbb.mass,large,cm_barra,p_impacto),0,0);
+            rbb.AddTorque(Vel_Ang_Elastica(vel, rbe.mass, rbb.mass, large, cm_barra, p_impacto), 0, 0, ForceMode.Impulse);
             this.angularVelocity = Vel_Ang_Elastica(vel, rbe.mass, rbb.mass, large, cm_barra, p_impacto);
             rbe.velocity = new Vector3(Vel_final_esf(vel, rbe.mass, rbb.mass, large, cm_barra, p_impacto), 0, 0);
         }
@@ -81,7 +82,8 @@ public class SphereBehaviour : MonoBehaviour
             float veli = rbe.velocity.x;
             rbb.velocity = new Vector3(Vel_CM(veli,rbe.mass, rbb.mass),0,0);
             this.angularVelocity = Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large);
-            rbb.angularVelocity = new Vector3(Vel_Ang_Inelastica(veli,rbe.mass, rbb.mass,cm_barra,p_impacto,large),0,0);
+            // rbb.angularVelocity = new Vector3(Vel_Ang_Inelastica(veli,rbe.mass, rbb.mass,cm_barra,p_impacto,large),0,0);
+            rbb.AddTorque(Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large), 0, 0, ForceMode.Impulse);
         }
     }
     
