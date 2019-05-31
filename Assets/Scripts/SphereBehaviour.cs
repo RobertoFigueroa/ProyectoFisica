@@ -11,12 +11,14 @@ public class SphereBehaviour : MonoBehaviour
     public Slider velocidad;
     public Slider masaesf;
     public Slider masab;
+    public Slider pinicial;
     //Ignorar los valores iniciales de las siguientes
     private float velocity = 250; //Valor de la velocidad inicial de la esfera
     private float masse = 20; //Valor de la masa de la esfera
     private float massb = 20; //Valor de la masa de la barra
     // Start is called before the first frame update
     public static bool inicio;
+    public static bool yainicio;
     public Toggle typec; 
     private bool typecol; //Tipo de colision
     public GameObject punto_inicial; //Posicion inicial de la barra
@@ -44,16 +46,18 @@ public class SphereBehaviour : MonoBehaviour
         cm_barra = large / 2;
 
         hasCollided = false;
+        yainicio = false;
         angularVelocity = 0.0f;
         angularMomentum = 0.0f;
-
-        
-
-
-
-
     }
 
+    private void FixedUpdate()
+    {
+        if (yainicio == false)
+        {
+            rbe.transform.position = new Vector3(-5, (float)0.23,(float) 6 - Esfinicial(large, pinicial.value));
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -90,8 +94,9 @@ public class SphereBehaviour : MonoBehaviour
             this.angularVelocity = Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large);
             // rbb.angularVelocity = new Vector3(Vel_Ang_Inelastica(veli,rbe.mass, rbb.mass,cm_barra,p_impacto,large),0,0);
             rbb.AddTorque(Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large), 0, 0, ForceMode.Impulse);
-            NewCenterOfMass(p_impacto, masab.value, masaesf.value);
-
+            //NewCenterOfMass(p_impacto, masab.value, masaesf.value);
+            //Debug.Log("CM es:"+Nue_CM(cm_barra, rbe.mass, rbb.mass, p_impacto));
+            indic.transform.position = new Vector3(0,(float)0.2,6- Nue_CM(cm_barra, rbe.mass, rbb.mass, p_impacto));
         }
     }
     
@@ -116,6 +121,7 @@ public class SphereBehaviour : MonoBehaviour
      -cm_actual=centro de masa actual
      -dis=posicion en la que golpea la esfera
      -largo=largo de la barra
+     esfin= posicion inical de la esfera respecto a la barra
      */
 
     //Velocidad Angular para colisiones elasticas
@@ -156,7 +162,7 @@ public class SphereBehaviour : MonoBehaviour
     float Nue_CM(float cmactual, float masa1, float masa2, Vector3 dis)
     {
         float n_cm=0;
-        n_cm = (masa1 * Brazo(cmactual, dis)) / (masa1 * masa2);
+        n_cm = (masa1 * Brazo(cmactual, dis)) / (masa1 + masa2);
         return n_cm;
     }
 
@@ -188,6 +194,14 @@ public class SphereBehaviour : MonoBehaviour
         float Vfinal = 0;
         Vfinal = ve_in - ((masa2 / masa1) * Vel_B(ve_in, masa1, masa2, largo, cmactual, dis));
         return Vfinal;
+    }
+
+    //Calcular la posicion inicial de la esfera
+    float Esfinicial(float largo, float porcentaje)
+    {
+        float esfin = 0;
+        esfin = largo * (porcentaje / 100);
+        return esfin;
     }
 
     void OnGUI()

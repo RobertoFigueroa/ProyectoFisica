@@ -24,6 +24,7 @@ public class Button : MonoBehaviour
         Time.timeScale = 1.0f;*/
         //Modifica el valor para iniciar la simulacion en SphereBehaviour.cs
         SphereBehaviour.inicio = true;
+        SphereBehaviour.yainicio = true;
     }
     public void Reinicio(string NewScene)
     {
