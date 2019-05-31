@@ -25,6 +25,8 @@ public class SphereBehaviour : MonoBehaviour
     private Vector3 l_barra; //Largo de la barra (solo para calculo)
     private float large; //Largo de la barra
     private float cm_barra; //Centro de masa de la barra
+    public GameObject indic;
+    //public GameObject indic2;
 
     private float angularVelocity;
     private float angularMomentum;
@@ -44,6 +46,10 @@ public class SphereBehaviour : MonoBehaviour
         hasCollided = false;
         angularVelocity = 0.0f;
         angularMomentum = 0.0f;
+
+        
+
+
 
 
     }
@@ -84,6 +90,8 @@ public class SphereBehaviour : MonoBehaviour
             this.angularVelocity = Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large);
             // rbb.angularVelocity = new Vector3(Vel_Ang_Inelastica(veli,rbe.mass, rbb.mass,cm_barra,p_impacto,large),0,0);
             rbb.AddTorque(Vel_Ang_Inelastica(veli, rbe.mass, rbb.mass, cm_barra, p_impacto, large), 0, 0, ForceMode.Impulse);
+            NewCenterOfMass(p_impacto, masab.value, masaesf.value);
+
         }
     }
     
@@ -193,6 +201,15 @@ public class SphereBehaviour : MonoBehaviour
         }
 
     }
+
+    public void NewCenterOfMass(Vector3 collisionImpact, float massBar, float massSphe)
+    {
+        float yCOM = (massSphe * (-collisionImpact.z+3)) / (massBar + massSphe);
+     
+        indic.transform.localPosition = new Vector3(0,yCOM,0);
+    }
+
+    
 
 }
 

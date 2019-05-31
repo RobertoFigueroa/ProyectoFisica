@@ -10,8 +10,8 @@ public class config : MonoBehaviour
     void Start()
     {
         //Muestra la pantalla de Inicio (Panel de UI)
-        Time.timeScale = 0.0f;
-        Panel.gameObject.SetActive(true);
+        /*Time.timeScale = 0.0f;
+        Panel.gameObject.SetActive(true);*/
     }
 
     // Update is called once per frame
@@ -23,19 +23,19 @@ public class config : MonoBehaviour
         transform.Find("Canvas").Find("Panel").Find("Masabarra").Find("printmasa").GetComponent<Text>().text = transform.Find("Canvas").Find("Panel").Find("Masabarra").GetComponent<Slider>().value.ToString();
         
         //Para mostrar u ocultar la pantalla de Inicio (Panel de UI) 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale == 1.0f)
             {
                 Time.timeScale = 0.0f;
                 Panel.gameObject.SetActive(true);
             }
-            /*else if (Time.timeScale == 0.0f)
+            else if (Time.timeScale == 0.0f)
             {
                 Time.timeScale = 1.0f;
                 Panel.gameObject.SetActive(false);
-            }*/
-        }
+            }
+        }*/
         
     }
 }

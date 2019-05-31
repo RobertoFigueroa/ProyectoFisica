@@ -19,11 +19,13 @@ public class DiskController : MonoBehaviour
     private float Radio; //tamaño del disco
     private float radio; //del centro del dico a la posicion de las esferas
     public static bool iniciar;
+    public static bool hainiciado;
     private bool hasCollided = false;
     private float angularVelocity;
     private float angularMomentum;
     private void Start()
     {
+        hainiciado = false;
         /*rbd = transform.GetComponent<Rigidbody>();
         rbesf1 = transform.GetComponent<Rigidbody>();
         rbesf2 = transform.GetComponent<Rigidbody>();*/
@@ -39,6 +41,22 @@ public class DiskController : MonoBehaviour
             iniciar = false;
         }
     }
+    private void FixedUpdate()
+    {
+        if (hainiciado == false)
+        {
+            rbd.mass = Mdis.value;
+            Radio = 2 * Rad.value;
+            this.speed = Vang.value;
+            this.radio = Calradio(Rad.value, radp.value);
+            transform.localScale = new Vector3(Radio, (float)0.1, Radio);
+            this.altura = 3 + alt.value;
+            rbesf1.position = new Vector3((float)0.48, altura, -radio);
+            rbesf2.position = new Vector3((float)-0.48, altura, radio);
+            rbesf1.mass = mesf.value;
+            rbesf2.mass = mesf.value;
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         //Cuando caen las pelotitas hace los calculos
@@ -51,6 +69,8 @@ public class DiskController : MonoBehaviour
     //Valores con los que inicia la simulacion
     void Comenzar()
     {
+        rbesf1.useGravity = true;
+        rbesf2.useGravity = true;
         rbd.mass = Mdis.value;
         Radio = 2 * Rad.value;
         this.speed = Vang.value;
